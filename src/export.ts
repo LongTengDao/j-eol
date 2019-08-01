@@ -55,7 +55,7 @@ export type NEL = '\x85';
 export type LS = '\u2028';
 export type PS = '\u2029';
 
-import Default from '.default';
+import Default from '.default?=';
 export default Default(EOL, {
 	version: version,
 	EOL: EOL,
