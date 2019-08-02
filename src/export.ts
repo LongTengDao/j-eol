@@ -5,8 +5,7 @@ import SyntaxError from '.SyntaxError';
 import RegExp from '.RegExp';
 import isArray from '.Array.isArray?=';
 
-import { groupify } from '@ltd/j-groupify';
-import { clearRegExp } from '@ltd/j-regexp';
+import { groupify, clearRegExp } from '@ltd/j-regexp';
 
 export function EOL<EOL extends string> (allow :EOL[] | RegExp, disallow_uniform? :string[] | RegExp | boolean, uniform_disallow? :boolean | string[] | RegExp) {
 	

@@ -12,7 +12,6 @@ require('@ltd/j-dev')(__dirname+'/..')(async ({ build, 龙腾道, get, ful }) =>
 		ES: 3,
 		semver: await get('src/version'),
 		locate: {
-			'@ltd/j-groupify': ful('../../LongTengDao/j-groupify/dist/ESM/.j-groupify'),
 			'@ltd/j-regexp': ful('../../LongTengDao/j-regexp/dist/ESM/.j-regexp'),
 		},
 		name: 'j-eol',

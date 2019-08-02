@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var version = '1.1.0';
+var version = '1.2.0';
 
 var toString = Object.prototype.toString;
 
@@ -105,15 +105,27 @@ var Default = (
 );
 
 /*!
- * 模块名称：j-groupify
- * 模块功能：将一个字符串数组，转化为分支式优化后的正则表达式匹配组。从属于“简计划”。
-   　　　　　Transform a string array into a branch-style optimized regExp group. Belong to "Plan J".
- * 模块版本：3.5.0
+ * 模块名称：j-regexp
+ * 模块功能：可读性更好的正则表达式创建方式。从属于“简计划”。
+   　　　　　More readable way for creating RegExp. Belong to "Plan J".
+ * 模块版本：5.3.0
  * 许可条款：LGPL-3.0
  * 所属作者：龙腾道 <LongTengDao@LongTengDao.com> (www.LongTengDao.com)
- * 问题反馈：https://GitHub.com/LongTengDao/j-groupify/issues
- * 项目主页：https://GitHub.com/LongTengDao/j-groupify/
+ * 问题反馈：https://GitHub.com/LongTengDao/j-regexp/issues
+ * 项目主页：https://GitHub.com/LongTengDao/j-regexp/
  */
+
+var clearRegExp = '$_' in RegExp
+	? function () {
+		var REGEXP = /^/;
+		return function clearRegExp                (value    )                {
+			REGEXP.test('');
+			return value;
+		};
+	}()
+	: function clearRegExp                (value    )                {
+		return value;
+	};
 
 var NEED_TO_ESCAPE_IN_REGEXP = /^[$()*+\-.?[\\\]^{|]/;
 var SURROGATE_PAIR = /^[\uD800-\uDBFF][\uDC00-\uDFFF]/;
@@ -162,31 +174,6 @@ function sourcify (group       , needEscape         )         {
 		)
 		+( noEmptyBranch ? '' : '?' );
 }
-
-/*¡ j-groupify */
-
-/*!
- * 模块名称：j-regexp
- * 模块功能：可读性更好的正则表达式创建方式。从属于“简计划”。
-   　　　　　More readable way for creating RegExp. Belong to "Plan J".
- * 模块版本：5.3.0
- * 许可条款：LGPL-3.0
- * 所属作者：龙腾道 <LongTengDao@LongTengDao.com> (www.LongTengDao.com)
- * 问题反馈：https://GitHub.com/LongTengDao/j-regexp/issues
- * 项目主页：https://GitHub.com/LongTengDao/j-regexp/
- */
-
-var clearRegExp = '$_' in RegExp
-	? function () {
-		var REGEXP = /^/;
-		return function clearRegExp                (value    )                {
-			REGEXP.test('');
-			return value;
-		};
-	}()
-	: function clearRegExp                (value    )                {
-		return value;
-	};
 
 /*¡ j-regexp */
 
