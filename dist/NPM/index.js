@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var version = '1.2.0';
+var version = '1.3.0';
 
 var toString = Object.prototype.toString;
 
@@ -108,7 +108,7 @@ var Default = (
  * 模块名称：j-regexp
  * 模块功能：可读性更好的正则表达式创建方式。从属于“简计划”。
    　　　　　More readable way for creating RegExp. Belong to "Plan J".
- * 模块版本：5.3.0
+ * 模块版本：6.0.0
  * 许可条款：LGPL-3.0
  * 所属作者：龙腾道 <LongTengDao@LongTengDao.com> (www.LongTengDao.com)
  * 问题反馈：https://GitHub.com/LongTengDao/j-regexp/issues
@@ -177,26 +177,37 @@ function sourcify (group       , needEscape         )         {
 
 /*¡ j-regexp */
 
+var FLAGS = /\/([a-fh-z]*)g([a-fh-z]*)$/;
+
+function removeGlobal (regExp        ) {
+	var flags = FLAGS.exec(''+regExp);
+	return flags ? RegExp(regExp, flags[1]+flags[2]) : regExp;
+}
+
 function EOL                     (allow                , disallow_uniform                              , uniform_disallow                              ) {
 	
+	var DISALLOW        ;
+	var FIRST         ;
 	if ( typeof disallow_uniform==='object' ) {
-		DISALLOW = isArray(disallow_uniform) ? new RegExp(groupify(disallow_uniform)) : disallow_uniform;
+		DISALLOW = isArray(disallow_uniform) ? RegExp(groupify(disallow_uniform)) : removeGlobal(disallow_uniform);
 		FIRST = !uniform_disallow;
 	}
 	else if ( typeof uniform_disallow==='object' ) {
-		DISALLOW = isArray(uniform_disallow) ? new RegExp(groupify(uniform_disallow)) : uniform_disallow;
+		DISALLOW = isArray(uniform_disallow) ? RegExp(groupify(uniform_disallow)) : removeGlobal(uniform_disallow);
 		FIRST = !disallow_uniform;
 	}
 	else {
 		FIRST = !( uniform_disallow || disallow_uniform );
 	}
-	var DISALLOW        ;
-	var FIRST         ;
-	var ALLOW = isArray(allow) ? new RegExp(groupify(allow), FIRST ? '' : 'g') : allow;
+	var ALLOW = isArray(allow)
+		? FIRST
+			? RegExp(groupify(allow))
+			: RegExp(groupify(allow), 'g')
+		: allow;
 	
 	return function EOL (string        )           {
 		if ( DISALLOW && DISALLOW.test(string) ) { throw clearRegExp(SyntaxError)('存在禁用换行符'); }
-		var eols               =                clearRegExp(string.match(ALLOW));
+		var eols = clearRegExp(string.match(ALLOW))                ;
 		if ( !eols ) { return ''; }
 		if ( FIRST ) { return eols[0]; }
 		var eol = eols[0];
