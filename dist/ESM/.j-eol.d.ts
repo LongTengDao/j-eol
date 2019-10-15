@@ -1,4 +1,4 @@
-export const version :'1.3.0';
+export const version :'1.3.1';
 
 export function EOL<EOL extends string> (allow :EOL[] | RegExp, disallow? :string[] | RegExp, uniform? :boolean) :(string :string) => EOL | '';
 export function EOL<EOL extends string> (allow :EOL[] | RegExp, uniform? :boolean, disallow? :string[] | RegExp) :(string :string) => EOL | '';
