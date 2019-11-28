@@ -2,14 +2,14 @@
  * 模块名称：j-eol
  * 模块功能：换行符相关共享实用程序。从属于“简计划”。
    　　　　　EOL util. Belong to "Plan J".
- * 模块版本：1.3.1
+ * 模块版本：1.4.0
  * 许可条款：LGPL-3.0
  * 所属作者：龙腾道 <LongTengDao@LongTengDao.com> (www.LongTengDao.com)
  * 问题反馈：https://GitHub.com/LongTengDao/j-eol/issues
  * 项目主页：https://GitHub.com/LongTengDao/j-eol/
  */
 
-var version = '1.3.1';
+var version = '1.4.0';
 
 var toString = Object.prototype.toString;
 
@@ -121,7 +121,7 @@ var Default = (
  * 模块名称：j-regexp
  * 模块功能：可读性更好的正则表达式创建方式。从属于“简计划”。
    　　　　　More readable way for creating RegExp. Belong to "Plan J".
- * 模块版本：6.2.1
+ * 模块版本：6.3.0
  * 许可条款：LGPL-3.0
  * 所属作者：龙腾道 <LongTengDao@LongTengDao.com> (www.LongTengDao.com)
  * 问题反馈：https://GitHub.com/LongTengDao/j-regexp/issues
@@ -144,7 +144,7 @@ var NEED_TO_ESCAPE_IN_REGEXP = /^[$()*+\-.?[\\\]^{|]/;
 var SURROGATE_PAIR = /^[\uD800-\uDBFF][\uDC00-\uDFFF]/;
 var GROUP = create(NULL)         ;
 
-function groupify (branches          , uFlag          , noEscape          )         {
+function groupify (branches                   , uFlag          , noEscape          )         {
 	var group = create(NULL)         ;
 	var appendBranch = uFlag ? appendPointBranch : appendCodeBranch;
 	for ( var length         = branches.length, index         = 0; index<length; ++index ) { appendBranch(group, branches[index]); }
